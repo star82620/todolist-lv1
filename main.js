@@ -67,7 +67,7 @@ window.addEventListener("load", function() {
             if (task_edit_el.innerText.toLowerCase() === "edit") {
                 // 移除唯獨狀態，讓 input 可以編輯
                 task_input_el.removeAttribute("readonly");
-                // task_input_el.focus();
+                task_input_el.focus();
                 task_edit_el.innerHTML = "save";
                 console.log("YES");
             } else {
