@@ -12,7 +12,6 @@
     box-sizing: border-box;
     margin: 0;
     font-family: 'Fira sans', sans-serif;
-
 }
 
 
@@ -54,6 +53,7 @@ input, button {
 
 #new_task_input {
     background-color: var(--darker);
+    width: 100%;
     padding: 1rem;
     border-radius: 1rem;
     margin-right: 1rem;
@@ -84,11 +84,14 @@ input, button {
     opacity: 0.6;
 }
 
+/* -----以上新增區塊，以下任務列表---- */
+
 .main {
     max-width: 800px;
     width: 100%;
     margin: 0 auto;
 }
+
 .task_list {
     padding: 1rem;
 }
@@ -100,6 +103,25 @@ input, button {
     margin-bottom: 1rem;
 }
 
+.filter {
+    display: flex;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.filter button {
+    padding: 1rem;
+    /* background-color: var(--darker); */
+    /* margin: 0 1rem 1rem 0; */
+    color: var(--gray);
+    cursor: pointer;
+}
+
+.filter button:active {
+    color:#fff;
+}
+
+
 /* 一個任務 */
 #tasks .task { 
     display: flex;
@@ -108,7 +130,34 @@ input, button {
     padding: 1rem;
     border-radius: 1rem;
     margin-bottom: 1rem;
+    transition: 0.4s;
 }
+
+#tasks .task .check {
+    margin-right:20px;
+}
+
+#tasks .task .do {
+    width: 30px;
+    height: 30px;
+    border-radius: 999px;
+    border: 2px solid var(--dark);
+    color: var(--dark);
+    font-weight: 400;
+    cursor: pointer;
+}
+
+#tasks .task .do:checked {
+    background-image: linear-gradient(to right, var(--pink), var(--purple));
+    position: relative;
+}
+
+/* #tasks .task .do:checked::after {
+    content: "V";
+    position: absolute;
+    top: 25%;
+    left: 25%;
+} */
 
 #tasks .task .content {
     /* flex: 1 1 0%; */
@@ -120,16 +169,21 @@ input, button {
     /* 初始的大小是 0% */
 }
 
+#tasks .task .content:focus {
+    background-color: var(--darker);
+}
+
 #tasks .task .content .text {
     color:var(--light);
     font-size: 1.125rem;
     width: 100%;  
+    height: 100%;
     display: block;
     transition: 0.4s;
+    /* vertical-align: bottom; */
 }
 
 /* 一般狀態下唯讀，進入編輯狀態才可編輯且文字內容為粉色 */
-
 #tasks .task .content .text:not(:read-only) {
     color: var(--pink);
 }
@@ -146,6 +200,7 @@ input, button {
     font-weight: 700;
     text-transform: uppercase;
     transition: 0.4s;
+    opacity: 1;
 }
 
 #tasks .task .actions button:hover {
@@ -155,6 +210,7 @@ input, button {
 #tasks .task .actions button:active {
     opacity: 0.6;
 }
+
 
 #tasks .task .actions .edit {
     background-image: linear-gradient(to right, var(--pink
