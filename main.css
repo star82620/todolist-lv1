@@ -188,6 +188,11 @@ input, button {
     color: var(--pink);
 }
 
+#tasks .task .content .done {
+    text-decoration: line-through;
+}
+
+
 #tasks .task .actions {
     display: flex;
     margin: 0 -0.5rem;
