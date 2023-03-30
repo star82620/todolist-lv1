@@ -2,15 +2,18 @@
 const newTaskForm = document.querySelector("#new_task_form");
 const newTaskInput = document.querySelector("#new_task_input");
 const taskWrapper = document.querySelector("#task_wrapper");
-const editButton = document.querySelector('#edit');
-const deleteButton = document.querySelector('#delete');
 
 const LOCAL_STORAGE_TASK_KEY = "ayu.tasks";
-const LOCAL_STORAGE_SELECTED_TASK_ID_KEY = "ayu.selectedTaskId";
 
 // 頁面載入時去 localStorage 撈 tasks
 // 若沒有 tasks 則（||） tasks = []（default 值的概念）
 let tasks = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TASK_KEY)) || [];
+
+// 【儲存】
+const saveTask = () => {
+    // 新增資料後去 localStorage 塞整個 tasks
+    localStorage.setItem(LOCAL_STORAGE_TASK_KEY, JSON.stringify(tasks)); // setItem(key, value)
+};
 
 // 【渲染】C"R"UD (read or render)
 // 跟畫面、顯示有關的我們習慣用 render（渲染）來命名
@@ -38,12 +41,6 @@ const render = () => {
     });
 
     taskWrapper.innerHTML = tasksHTML;
-};
-
-// 【儲存】
-const saveTask = () => {
-    // 新增資料後去 localStorage 塞整個 tasks
-    localStorage.setItem(LOCAL_STORAGE_TASK_KEY, JSON.stringify(tasks)); // setItem(key, value)
 };
 
 // 【新增】"C"RUD
