@@ -123,7 +123,7 @@ input, button {
 
 
 /* 一個任務 */
-#tasks .task { 
+#task_wrapper .task { 
     display: flex;
     justify-content: space-between;
     background-color: var(--darkest);
@@ -133,11 +133,11 @@ input, button {
     transition: 0.4s;
 }
 
-#tasks .task .check {
+#task_wrapper .task .check {
     margin-right:20px;
 }
 
-#tasks .task .do {
+#task_wrapper .task .do {
     width: 30px;
     height: 30px;
     border-radius: 999px;
@@ -147,19 +147,19 @@ input, button {
     cursor: pointer;
 }
 
-#tasks .task .do:checked {
+#task_wrapper .task .do:checked {
     background-image: linear-gradient(to right, var(--pink), var(--purple));
     position: relative;
 }
 
-/* #tasks .task .do:checked::after {
+/* #task_wrapper .task .do:checked::after {
     content: "V";
     position: absolute;
     top: 25%;
     left: 25%;
 } */
 
-#tasks .task .content {
+#task_wrapper .task .content {
     /* flex: 1 1 0%; */
     flex-grow: 1;
     /* 佔據剩下的所有面積 */
@@ -169,11 +169,11 @@ input, button {
     /* 初始的大小是 0% */
 }
 
-#tasks .task .content:focus {
+#task_wrapper .task .content:focus {
     background-color: var(--darker);
 }
 
-#tasks .task .content .text {
+#task_wrapper .task .content .text {
     color:var(--light);
     font-size: 1.125rem;
     width: 100%;  
@@ -184,21 +184,21 @@ input, button {
 }
 
 /* 一般狀態下唯讀，進入編輯狀態才可編輯且文字內容為粉色 */
-#tasks .task .content .text:not(:read-only) {
+#task_wrapper .task .content .text:not(:read-only) {
     color: var(--pink);
 }
 
-#tasks .task .content .done {
+#task_wrapper .task .content .done {
     text-decoration: line-through;
 }
 
 
-#tasks .task .actions {
+#task_wrapper .task .actions {
     display: flex;
     margin: 0 -0.5rem;
 }
 
-#tasks .task .actions button {
+#task_wrapper .task .actions button {
     cursor: pointer;
     margin: 0 0.5rem;
     font-size: 1.125rem;
@@ -208,22 +208,22 @@ input, button {
     opacity: 1;
 }
 
-#tasks .task .actions button:hover {
+#task_wrapper .task .actions button:hover {
     opacity: 0.8;
 }
 
-#tasks .task .actions button:active {
+#task_wrapper .task .actions button:active {
     opacity: 0.6;
 }
 
 
-#tasks .task .actions .edit {
+#task_wrapper .task .actions .edit {
     background-image: linear-gradient(to right, var(--pink
     ), var(--purple));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-#tasks .task .actions .delete {
+#task_wrapper .task .actions .delete {
     color: crimson;
 }

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="main.css">
-    <script src="main_ver2.js" defer></script>
+    <script src="main-ver3.js" defer></script>
     <title>To do list 2023</title>
 </head>
 <body>
@@ -26,14 +26,24 @@
         <div class="main">
             <section class="task_list">
                 <h2>Tasks</h2>
+                <!-- 
+                    filter 的東西不要放在 tasks 裡面
+                    一開始會出現，但之後會被 innerHTML 洗掉
+                -->
+                <div class="filter">
+                    <button class="doing">done</button>
+                    <button class="done">progress</button>
+                    <button class="all">all</button>
+                </div>
 
-                <div id="tasks">
-                    <div class="filter">
-                        <button class="doing">已完成</button>
-                        <button class="done">未完成</button>
-                        <button class="all">全部</button>
-                    </div>
-                    <!--一個任務 -->
+                <!--
+                    跟容器、包覆有關的我都會叫 wrapper 或是 container
+                    用意在於看命名就知道是「外層」，且不會搶到其他的命名
+                    (例：tasksData 就可以簡化成 tasks)
+
+                    可以試著把結構優化成 ul 包 li
+                -->
+                <div id="task_wrapper">
                     <!-- <div class="task">
                         <div class="check">
                             <input type="checkbox" class="do">
