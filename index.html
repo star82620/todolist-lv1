@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="main.css">
-    <script src="main_ver2.js" defer></script>
+    <script src="main_kata01.js" defer></script>
     <title>To do list 2023</title>
 </head>
 <body>
@@ -26,19 +26,19 @@
         <div class="main">
             <section class="task_list">
                 <h2>Tasks</h2>
+                <div class="filter">
+                    <button class="all">全部</button>
+                    <button class="progress">未完成</button>
+                    <button class="done">已完成</button>
+                </div>
 
                 <div id="tasks">
-                    <div class="filter">
-                        <button class="doing">已完成</button>
-                        <button class="done">未完成</button>
-                        <button class="all">全部</button>
-                    </div>
                     <!--一個任務 -->
-                    <!-- <div class="task">
+                    <!-- <div class="task (done)">
                         <div class="check">
-                            <input type="checkbox" class="do">
+                            <input type="checkbox" class="do" (checked)>
                         </div>
-                        <div class="content" data-id="1">
+                        <div class="content" data-index="1">
                             <input 
                             type="text"
                             class="text"
@@ -46,8 +46,8 @@
                             readonly>
                         </div>
                         <div class="actions">
-                            <button class="edit" data-id="1">Edit</button>
-                            <button class="delete" data-id="1">Delete</button>
+                            <button class="edit" data-index="1">Edit</button>
+                            <button class="delete" data-index="1">Delete</button>
                         </div>
                     </div> -->
                 </div>

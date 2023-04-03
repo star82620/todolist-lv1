@@ -188,7 +188,7 @@ input, button {
     color: var(--pink);
 }
 
-#tasks .task .content .done {
+#tasks .done .content .text{
     text-decoration: line-through;
 }
 
