@@ -117,9 +117,10 @@ input, button {
     cursor: pointer;
 }
 
-.filter button:active {
+.filter button:active, .filter .activating {
     color:#fff;
 }
+
 
 
 /* 一個任務 */
