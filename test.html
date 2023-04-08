@@ -15,14 +15,111 @@
     
 
     <script>
-        const title = document.querySelector(".title");
+        console.clear();
+        // 我有一個 JSON 檔案，要先抓下來
+        // https://raw.githubusercontent.com/hexschool/2021-ui-frontend-job/master/frontend_data.json
 
-        title.addEventListener("click",function(e) {
-            let targetValue=e.target.value;
- 
-            console.log(aaa);
-
+        //好像沒有 try 和 catch 也可以？
+        async function fetchData (){
+        let res = await fetch("https://raw.githubusercontent.com/hexschool/2021-ui-frontend-job/master/frontend_data.json", {method: "GET"});
+        let json = await res.json();
+        // console.log (jsonData);
+        
+        let data = json[0];
+        let leng = json.length;
+        // console.log(data);
+        
+        //---第一題：各學歷人數---
+        const a = json.reduce(function(obj, item){
+            if(obj[item.education]){
+                obj[item.education]++;
+            } else {
+                obj[item.education] = 1;      
+            };
+            //const m = obj[item.eduction];
+            //m ? m = m+1 : m=1;
+            
+            //obj[item.eduction] ? obj[item.education] ++ : obj[item.education] = 1;
+            return obj;
+        }, {});
+        
+        // console.log("a", a);
+        
+        //---第二題：各地區工作人士佔比人數---
+        const areas = json.map(function(item){
+            return item.company.area;
         });
+        
+        // item 改成 area 方便理解
+        const areaQtu = areas.reduce(function(obj, area, index, array){
+            
+            //每個地區的人數
+            if(obj[area]){
+                obj[area] ++;   
+            } else {
+                obj[area] = 1;
+            };
+            
+            return obj;
+            
+        }, {}); //是一個物件不是陣列
+        // {中國:2, 台灣 - 中彰投: 67, 台灣 - 北北基: 323,...}
+        // 把物件中的 value 取出變成一個 array
+        
+        // 總和：取出物件中的每一個值並相加，要先把物件的值轉為陣列
+        const totalArea = Object.values(areaQtu).reduce(function(arr, item) {
+            return arr + item;
+        }, 0);
+
+        // 各自/總和
+        console.log(areaQtu["台灣 - 北北基"]/totalArea*100+"%");
+        console.log(Math.round(areaQtu["台灣 - 北北基"]/totalArea*100)+"%");
+        console.log(Math.round(areaQtu["台灣 - 北北基"]/totalArea*10000)/100+"%");
+        
+
+        // let y = Object.entries(areaQtu);
+        //     const ykey = y[0][0].toString();
+        //     const value = y[0][1];
+
+        //     console.log(ykey+":"+value);
+        //     let yarr = {[ykey]: value};
+
+        //     console.log(typeof(ykey));
+        //     console.log(yarr);
+
+        let b = Object.entries(areaQtu).reduce(function(arr, item, index, array){
+            // arr[0] = {};
+
+            // array[0] => ['台灣 - 高屏', 30]
+            // array[1] => ['台灣 - 中彰投', 67]
+            
+            const key = array[index][0];
+            const value = Math.round(array[index][1]/totalArea*1000)/10+"%";
+
+            arr[index] = {[key]: value};
+            // arr[0] 的意思是：給空陣列加入第一筆資料
+            // arr[0] = {}
+            // arr[0].key = value 給陣列 arr 的第一筆資料加入 key value
+            // 物件的key：array[index][0]
+            // 物件的value：array[index][1];
+            return arr;
+        }, []);
+
+        console.log(b);
+
+        //[{"台灣 - 北北基":"87%"}, {...}, ...]
+        
+        // console.log("totalArea", totalArea);
+        // console.log("areaQtu", areaQtu);
+        // console.log("array-areaQtu", Object.entries(areaQtu));
+        // console.log();
+        // console.log("areas", areas);
+        // console.log("a");
+        };
+
+        fetchData();
+
+
 
     </script>
 </body>
