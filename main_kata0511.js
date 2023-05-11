@@ -1,47 +1,43 @@
-//2023/05/10 09:25-09:48
+//2023/05/11 0917-0935(18)
 
-const LOCAL_STORAGE_KEY = "ayu_kata0510";
-const tasksData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))||[];
+//C"R"UD 0917-0921
+const tasksList = document.querySelector("#tasks");
+
+const LOCAL_STORAGE_KEY = "ayu_kata0511";
+const tasksData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
 const saveData = () => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(tasksData));
 };
 
-const tasksList = document.querySelector("#tasks");
-
-
-//C"R"UD 0925-0930
 const saveAndRender = () => {
     saveData();
-
     let tasksHTML = "";
+
     tasksData.forEach((item) => {
         const isDone = item.done ? "done" : "";
         const isChecked = item.done ? "checked" : "";
 
         const taskElement = 
-        `<div class="task ${isDone}">
-            <div class="check">
-            <input type="checkbox" class="do" data-id="${item.id}" ${isChecked}>
-            </div>
-            <div class="content">
-            <input type="text" class="text" value="${item.value}" data-id="${item.id}" readonly>
-            </div>
-            <div class="actions">
-            <button class="edit" data-id="${item.id}">Edit</button>
-            <button class="delete" data-id="${item.id}">Delete</button>
-            </div>
-        </div>`;
-        
+            `<div class="task ${isDone}">
+                <div class="check">
+                <input type="checkbox" class="do" data-id="${item.id}" ${isChecked}>
+                </div>
+                <div class="content">
+                <input type="text" class="text" value="${item.value}" data-id="${item.id}" readonly>
+                </div>
+                <div class="actions">
+                <button class="edit" data-id="${item.id}">Edit</button>
+                <button class="delete" data-id="${item.id}">Delete</button>
+                </div>
+            </div>`;
         tasksHTML += taskElement;
     });
-
     tasksList.innerHTML = tasksHTML;
 };
 
 saveAndRender();
 
-
-//"C"RUD 0930-0934
+//"C"RUD 0921-24
 const newTaskForm = document.querySelector("#new_task_form");
 const newTaskInput = document.querySelector("#new_task_input");
 
@@ -54,40 +50,42 @@ newTaskForm.addEventListener("submit", (e) => {
         value: newTaskInput.value,
         done: false
     };
-    
-    newTaskInput.value = "";
 
     tasksData.push(taskValue);
     saveAndRender();
+
+    newTaskInput.value = "";
 });
 
-
-//CR"UD" 0936-0948
+//CR"UD" 0927-0935
 tasksList.addEventListener("click", (e) => {
-    let buttonClass = e.target.classList;
     const taskWarp = e.target.parentNode.parentNode;
     const taskText = taskWarp.querySelector(".text");
     const taskId = e.target.dataset.id;
     const taskIndex = tasksData.findIndex((item) => {
         return item.id === taskId;
     });
-
-    //-0948
+    
+    const buttonClass = e.target.classList;
+    //0935-37
     if(buttonClass.contains("do")) {
-        if(e.target.checked) {
-            tasksData[taskIndex].done = true;
-            taskWarp.classList.add("done");
-        } else {
-            tasksData[taskIndex].done = false;
-            taskWarp.classList.remove("done");
-        };
+        const doChecked = e.target.checked;
+
+        taskWarp.classList.toggle("done", doChecked);
+        tasksData[taskIndex].done = doChecked;
+
+        // if(doChecked) {
+        //     taskWarp.classList.add("done");
+        //     tasksData[taskIndex].done = true;
+        // } else {
+        //     taskWarp.classList.remove("done");
+        //     tasksData[taskIndex].done = false;
+        // };
         saveAndRender();
     };
-
-    //-0945
+    //0928-33
     if(buttonClass.contains("edit")) {
         if(e.target.innerText.toLowerCase() === "edit") {
-            console.log("a");
             e.target.innerText = "save";
             taskText.removeAttribute("readonly");
             taskText.focus();
@@ -95,14 +93,14 @@ tasksList.addEventListener("click", (e) => {
         } else {
             e.target.innerText = "edit";
             taskText.setAttribute("readonly", "readonly");
-            tasksData[taskIndex].value=taskText.value;
+            tasksData[taskIndex].value = taskText.value;
             saveAndRender();
         };
     };
-
-    //-0946
+    //0933-35
     if(buttonClass.contains("delete")) {
         tasksData.splice(taskIndex, 1);
         saveAndRender();
     };
+
 });
