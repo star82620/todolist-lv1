@@ -1,40 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="main.css">
-    <script src="main_kata0518.js" defer></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="main.css" />
+    <script src="main_kata0522.js" defer></script>
     <title>To do list 2023</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="wrap">
-        <div class="header">
-            <h1>Task List 2023</h1>
-            <form id="new_task_form">
-                <input 
-                    type="text" 
-                    id="new_task_input" 
-                    placeholder="What do you have planned?">
-                <input 
-                    type="submit"
-                    id="new_task_submit"
-                    value="Add task">
-            </form>
-        </div>
-        <div class="main">
-            <section class="task_list">
-                <h2>Tasks</h2>
-                <div class="filter">
-                    <button class="all">全部</button>
-                    <button class="progress">未完成</button>
-                    <button class="done">已完成</button>
-                </div>
+      <div class="header">
+        <h1>Task List 2023</h1>
+        <form id="new_task_form">
+          <input
+            type="text"
+            id="new_task_input"
+            placeholder="What do you have planned?"
+          />
+          <input type="submit" id="new_task_submit" value="Add task" />
+        </form>
+      </div>
+      <div class="main">
+        <section class="task_list">
+          <h2>Tasks</h2>
+          <div class="filter">
+            <button class="all">全部</button>
+            <button class="progress">未完成</button>
+            <button class="done">已完成</button>
+          </div>
 
-                <div id="tasks">
-                    <!--一個任務 -->
-                    <!-- <div class="task (done)">
+          <div id="tasks">
+            <!--一個任務 -->
+            <!-- <div class="task (done)">
                         <div class="check">
                             <input type="checkbox" class="do" (checked)>
                         </div>
@@ -50,9 +48,9 @@
                             <button class="delete" data-id="1">Delete</button>
                         </div>
                     </div> -->
-                </div>
-            </section>
-        </div>
+          </div>
+        </section>
+      </div>
     </div>
-</body>
+  </body>
 </html>
