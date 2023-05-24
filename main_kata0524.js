@@ -1,11 +1,11 @@
-//2023/05/22 1120-1204 (44)
+//2023/05/24 0935-56 (21)
 
-//C"R"UD 1120-37
+//C"R"UD
 const tasksList = document.querySelector("#tasks");
 
-const LOCAL_STORAGE_KEY = "ayu_kata0522";
+const LOCAL_STORAGE_KEY = "ayu_kata0524";
 const tasksData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
-const saveDate = () => {
+const saveData = () => {
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(tasksData));
 };
 const render = () => {
@@ -13,7 +13,6 @@ const render = () => {
   tasksData.forEach((item) => {
     const isDone = item.done ? "done" : "";
     const isChecked = item.done ? "checked" : "";
-
     const taskElement = `<div class="task ${isDone}">
         <div class="check">
         <input type="checkbox" class="do" data-id="${item.id}" ${isChecked}>
@@ -26,26 +25,21 @@ const render = () => {
         <button class="delete" data-id="${item.id}">Delete</button>
         </div>
       </div>`;
-
     tasksHTML += taskElement;
   });
-
   tasksList.innerHTML = tasksHTML;
+  // 抓錯了也會變成ＮＵＬＬ
 };
 
 const saveAndRender = () => {
+  saveData();
   render();
-  saveDate();
 };
-
 saveAndRender();
 
-//"C"RUD 1137-1145
-
+//"C"RUD 0941-45
 const newTaskForm = document.querySelector("#new_task_form");
 const newTaskInput = document.querySelector("#new_task_input");
-
-console.log(newTaskForm);
 
 newTaskForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -56,14 +50,15 @@ newTaskForm.addEventListener("submit", (e) => {
     value: newTaskInput.value,
     done: false,
   };
+  newTaskInput.value = "";
 
   tasksData.push(taskValue);
   saveAndRender();
 });
 
-//CR"UD" 1148-
+//CR"UD" 0948-56
 tasksList.addEventListener("click", (e) => {
-  const buttonClass = e.target.classList;
+  const btnClass = e.target.classList;
   const taskWarp = e.target.parentNode.parentNode;
   const taskText = taskWarp.querySelector(".text");
   const taskId = e.target.dataset.id;
@@ -71,15 +66,13 @@ tasksList.addEventListener("click", (e) => {
     return item.id === taskId;
   });
 
-  if (buttonClass.contains("do")) {
-    const btnChecked = e.target.checked;
-
-    taskWarp.classList.toggle("done", btnChecked);
-    tasksData[taskIndex].done = btnChecked;
+  if (btnClass.contains("do")) {
+    const isBtnChecked = e.target.checked;
+    taskWarp.classList.toggle("done", isBtnChecked);
+    tasksData[taskIndex].done = isBtnChecked;
     saveAndRender();
   }
-  if (buttonClass.contains("edit")) {
-    console.log(e.target.innerText);
+  if (btnClass.contains("edit")) {
     if (e.target.innerText.toLowerCase() === "edit") {
       e.target.innerText = "save";
       taskText.removeAttribute("readonly");
@@ -87,11 +80,12 @@ tasksList.addEventListener("click", (e) => {
       taskText.setSelectionRange(999, 999);
     } else {
       e.target.innerText = "edit";
+      taskText.setAttribute("readonly", "readonly");
       tasksData[taskIndex].value = taskText.value;
       saveAndRender();
     }
   }
-  if (buttonClass.contains("delete")) {
+  if (btnClass.contains("delete")) {
     tasksData.splice(taskIndex, 1);
     saveAndRender();
   }
